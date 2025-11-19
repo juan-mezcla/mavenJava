@@ -1,5 +1,6 @@
 package accesoDatos.tarea11;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -9,7 +10,7 @@ import java.util.Scanner;
 public class App {
 	private static Scanner prompt = new Scanner(System.in);
 	private static DatabaseManager conexion = new DatabaseManager();
-
+	private static List<Alumno> alumnos=new ArrayList<Alumno>();
 	public static void main(String[] args) {
 		
 		new App().menu();
@@ -40,10 +41,11 @@ public class App {
 					insertar_Alumno();
 					break;
 				case 2:
-					conexion.select_AllDatos();
+				
+					mostrar_todos_los_alumnos();
 					break;
 				case 3:
-					
+					guardarEnFichero();
 					break;
 				case 4:
 					
@@ -81,6 +83,36 @@ public class App {
 		Alumno alumno=new Alumno();
 		
 		conexion.inertar_Datos(alumno);
+	}
+	
+	
+	private void mostrar_todos_los_alumnos() {
+		alumnos=conexion.select_AllDatos();
+		
+		alumnos.forEach(alumno->{
+			System.out.println(alumno);
+		});
+	}
+	
+	private void guardarEnFichero() {
+		System.out.println("introduce la ruta donde quieres que se guarden los datos (tiene que ser un .txt):");
+		String ruta=prompt.nextLine();
+		if(ruta.endsWith(".txt")) {
+			conexion.guardar_Datos_En_Fichero(ruta);
+		}else {
+			System.out.println("Tiene que ser en formato .txt el fichero");
+		}
+	}
+	
+	
+	private void mandar_datos_Fichera_a_BD() {
+		System.out.println("introduce la ruta del fichero que contiene los datos:");
+		String ruta=prompt.nextLine();
+		if(ruta.endsWith(".txt")) {
+			conexion.guardar_Datos_En_Fichero(ruta);
+		}else {
+			System.out.println("Tiene que ser en formato .txt el fichero");
+		}
 	}
 	
 }

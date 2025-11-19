@@ -34,8 +34,8 @@ public class Alumno implements Serializable{
 				+ ", curso=" + curso + ", grupo=" + grupo + ", genero=" + genero + ", fecha=" + fechaFormat + "]";
 	}
 
-	public Alumno(int nia, String nombre, String apellidos, String ciclo, String curso, String grupo, char genero,
-			LocalDate fecha) {
+	public Alumno(int nia, String nombre, String apellidos,  char genero,LocalDate fecha,String ciclo, String curso, String grupo
+			) {
 		
 		this.nia = nia;
 		this.nombre = nombre;
