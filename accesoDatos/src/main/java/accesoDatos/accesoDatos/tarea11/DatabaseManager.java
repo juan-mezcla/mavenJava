@@ -20,6 +20,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class DatabaseManager {
 	private List<String> campos = List.of("NIA", "Nombre", "Apellidos", "Genero", "FechaNacimiento", "Ciclo", "Curso",
 			"Grupo");
 	private String strCampos = String.join(",", campos);
-
+	static DateTimeFormatter formatoFech=DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	/**
 	 * 
 	 */
@@ -70,7 +71,7 @@ public class DatabaseManager {
 			consulta.setString(2, alumno.getNombre());
 			consulta.setString(3, alumno.getApellidos());
 			consulta.setString(4, alumno.getGenero());
-			consulta.setDate(5, java.sql.Date.valueOf(alumno.getFecha()));// Para formatearlo y que valga para mysql
+			consulta.setString(5, alumno.getFecha().toString());
 			consulta.setString(6, alumno.getCiclo());
 			consulta.setString(7, alumno.getCurso());
 			consulta.setString(8, alumno.getGrupo());
@@ -253,7 +254,7 @@ public class DatabaseManager {
 			atributosAlumno.add(new Atributo("nombre",alumno.getNombre()));
 			atributosAlumno.add(new Atributo("apellidos",alumno.getApellidos()));
 			atributosAlumno.add(new Atributo("genero",String.valueOf(alumno.getGenero())));
-			atributosAlumno.add(new Atributo("fechaNacimiento",alumno.getFechaString()));
+			atributosAlumno.add(new Atributo("fechaNacimiento",alumno.getFecha().toString()));
 			atributosAlumno.add(new Atributo("ciclo",alumno.getCiclo()));
 			atributosAlumno.add(new Atributo("curso",alumno.getCurso()));
 			atributosAlumno.add(new Atributo("grupo",alumno.getGrupo()));
@@ -276,7 +277,7 @@ public class DatabaseManager {
 			ObjectMapper mapper = new ObjectMapper();
 			mapper.registerModule(new JavaTimeModule());
 			mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-			mapper.enable(SerializationFeature.INDENT_OUTPUT);
+			
 				
 			mapper.writeValue(arch, alumnos);
 			
@@ -300,11 +301,12 @@ public class DatabaseManager {
 		File arch=comprobarFichero(ruta);
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.registerModule(new JavaTimeModule());
-		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        
 		try {
 			List<Alumno> alumnos = mapper.readValue(arch,new TypeReference<List<Alumno>>() {});
 			alumnos.forEach(alumno->{
-				System.out.println(alumno);
+				this.inertar_Datos(alumno);
 			});
 			
 		} catch (IOException e) {
