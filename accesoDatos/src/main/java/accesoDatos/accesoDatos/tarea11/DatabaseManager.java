@@ -1,7 +1,7 @@
 /**
  * 
  */
-package accesoDatos.tarea11;
+package accesoDatos.accesoDatos.tarea11;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -38,7 +38,7 @@ import com.google.gson.GsonBuilder;
  * 
  */
 public class DatabaseManager {
-	private String url = "jdbc:mysql://localhost:3306/tarea11?useSSL=false&serverTimezone=UTC", user = "root",
+	private String url = "jdbc:mysql://localhost:3306/acceso_a_datos?useSSL=false&serverTimezone=UTC", user = "root",
 			pass = "manager";
 	private Connection conexion;
 	private List<String> campos = List.of("NIA", "Nombre", "Apellidos", "Genero", "FechaNacimiento", "Ciclo", "Curso",
@@ -290,9 +290,10 @@ public class DatabaseManager {
 		}
 	}
 
-	public boolean leer_Datos_En_Xml(String ruta) {
+	public void leer_Datos_En_Xml(String ruta) {
+		ArchivoXml xml=new ArchivoXml();
 		
-		return false;
+		xml.leerXml(ruta);	
 	}
 	
 	public boolean leer_Datos_En_Json(String ruta) {
