@@ -39,12 +39,11 @@ import com.google.gson.GsonBuilder;
  * 
  */
 public class DatabaseManager {
-	private String url = "jdbc:mysql://localhost:3306/acceso_a_datos?useSSL=false&serverTimezone=UTC", user = "root",
-			pass = "manager";
+	private String url ="jdbc:mysql://localhost:3306/tarea11?useSSL=false&serverTimezone=UTC", user = "root",
+			pass = "manager";//RUTA DE CLASE->"jdbc:mysql://localhost:3306/acceso_a_datos?useSSL=false&serverTimezone=UTC" RUTA DE CASA->"jdbc:mysql://localhost:3306/tarea11?useSSL=false&serverTimezone=UTC"
 	private Connection conexion;
-	private List<String> campos = List.of("NIA", "Nombre", "Apellidos", "Genero", "FechaNacimiento", "Ciclo", "Curso",
-			"Grupo");
-	private String strCampos = String.join(",", campos);
+	//private List<String> campos = List.of("NIA", "Nombre", "Apellidos", "Genero", "FechaNacimiento", "Ciclo", "Curso","Grupo");//No se por que no me funciona ahora el .of (problema de version jdk se supone)
+	private String strCampos ="NIA,Nombre,Apellidos,Genero,FechaNacimiento,Ciclo,Curso,Grupo";// String.join(",", campos);
 	static DateTimeFormatter formatoFech=DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	/**
 	 * 
