@@ -76,6 +76,7 @@ public class DatabaseManager {
 			consulta.setString(8, alumno.getGrupo());
 
 			consulta.executeUpdate();
+			consulta.close();
 			System.out.println("Alumno insertado correctamente");
 			return true;
 		} catch (SQLException e) {
@@ -100,6 +101,8 @@ public class DatabaseManager {
 				alumnos.add(new Alumno(r.getInt(1), r.getString(2), r.getString(3), r.getString(4).toCharArray()[0],
 						LocalDate.parse(r.getString(5)), r.getString(6), r.getString(7), r.getString(8)));
 			}
+			
+			r.close();
 			System.out.println("Datos recogidos correctamente");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -130,7 +133,7 @@ public class DatabaseManager {
 					e.printStackTrace();
 				}
 			});
-
+			escribirAlumno.close();
 			escribir.flush();
 			escribir.close();
 		} catch (IOException e) {
@@ -179,8 +182,9 @@ public class DatabaseManager {
 			PreparedStatement consulta = conexion.prepareStatement(update);
 			consulta.setString(1, nombre);
 			consulta.setInt(2, nia);
-			consulta.execute();
 			
+			consulta.execute();
+			consulta.close();
 			System.out.println("Alumno modificado correctamente");
 			return true;
 		} catch (SQLException e) {
@@ -269,10 +273,6 @@ public class DatabaseManager {
 		File arch=comprobarFichero(ruta);
 		List<Alumno> alumnos=this.select_AllDatos();
 		try {
-			Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-			FileWriter escribirJson = new FileWriter(arch);
-			
 			ObjectMapper mapper = new ObjectMapper();
 			mapper.registerModule(new JavaTimeModule());
 			mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
