@@ -3,6 +3,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Alumno implements Serializable{
@@ -12,6 +13,7 @@ public class Alumno implements Serializable{
 	private int nia;
 	private String nombre,apellidos,ciclo,curso,grupo;
 	private char genero;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate fecha;
 	
 	static DateTimeFormatter formatoFech=DateTimeFormatter.ofPattern("dd/MM/yyyy"); 
