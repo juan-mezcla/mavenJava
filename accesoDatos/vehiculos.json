@@ -1,0 +1,65 @@
+{
+  "totalVehiculos" : 10,
+  "fechaExport" : "2026-12-05",
+  "vehiculos" : [ {
+    "matricula" : "matricula1",
+    "marca" : "marca1",
+    "modelo" : "modelo1",
+    "km" : 10000,
+    "fechaInspenccion" : "2024-11-28"
+  }, {
+    "matricula" : "matricula2",
+    "marca" : "marca2",
+    "modelo" : "modelo2",
+    "km" : 20000,
+    "fechaInspenccion" : "2023-11-28"
+  }, {
+    "matricula" : "matricula3",
+    "marca" : "marca3",
+    "modelo" : "modelo3",
+    "km" : 30000,
+    "fechaInspenccion" : "2022-11-28"
+  }, {
+    "matricula" : "matricula4",
+    "marca" : "marca4",
+    "modelo" : "modelo4",
+    "km" : 40000,
+    "fechaInspenccion" : "2021-11-28"
+  }, {
+    "matricula" : "matricula5",
+    "marca" : "marca5",
+    "modelo" : "modelo5",
+    "km" : 50000,
+    "fechaInspenccion" : "2020-11-28"
+  }, {
+    "matricula" : "matricula6",
+    "marca" : "marca6",
+    "modelo" : "modelo6",
+    "km" : 60000,
+    "fechaInspenccion" : "2019-11-28"
+  }, {
+    "matricula" : "matricula7",
+    "marca" : "marca7",
+    "modelo" : "modelo7",
+    "km" : 70000,
+    "fechaInspenccion" : "2018-11-28"
+  }, {
+    "matricula" : "matricula8",
+    "marca" : "marca8",
+    "modelo" : "modelo8",
+    "km" : 80000,
+    "fechaInspenccion" : "2017-11-28"
+  }, {
+    "matricula" : "matricula9",
+    "marca" : "marca9",
+    "modelo" : "modelo9",
+    "km" : 90000,
+    "fechaInspenccion" : "2016-11-28"
+  }, {
+    "matricula" : "matricula10",
+    "marca" : "marca10",
+    "modelo" : "modelo10",
+    "km" : 100000,
+    "fechaInspenccion" : "2015-11-28"
+  } ]
+}

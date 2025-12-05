@@ -159,8 +159,7 @@ public class App {
 			mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 			
 			Vehiculos datosVehiculos=new Vehiculos(vehiculosCSV);
-			
-			mapper.writeValue(archJSON,datosVehiculos);
+			mapper.writerWithDefaultPrettyPrinter().writeValue(archJSON,datosVehiculos);
 			
 			
 			System.out.println("Datos pasados a .Json correctamente");
