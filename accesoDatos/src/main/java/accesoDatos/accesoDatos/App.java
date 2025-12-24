@@ -37,7 +37,7 @@ public class App
 	                gson.toJson(listaAlumnos, escribirJson);
 	            }
 
-	            System.out.println("Archivo JSON creado correctamente.");
+	            System.out.println("Archivo JSON creado correctamentee.");
 	            
 	            
 	            try (FileReader reader = new FileReader("alumnos.json")) {
