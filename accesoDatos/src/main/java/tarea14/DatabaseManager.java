@@ -330,5 +330,20 @@ public class DatabaseManager implements DataBaseInterface{
 	public void setConexion(Connection conexion) {
 		this.conexion = conexion;
 	}
+	@Override
+	public void leer_Datos_Xml_o_Json() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mandar_Datos_De_Json_A_BD(String ruta) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mandar_Datos_De_Xml_A_BD(String ruta) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
