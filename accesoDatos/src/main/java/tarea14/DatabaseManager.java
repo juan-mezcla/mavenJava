@@ -260,7 +260,7 @@ public class DatabaseManager implements DataBaseInterface{
 		xml.crearXml();
 	}
 	@Override
-	public void guardar_Datos_En_Json(String ruta) {
+	public boolean guardar_Datos_En_Json(String ruta) {
 		File arch=comprobarFichero(ruta);
 		List<Alumno> alumnos=this.obtener_todos_los_alumnos();
 		try {
@@ -271,13 +271,13 @@ public class DatabaseManager implements DataBaseInterface{
 				
 			mapper.writeValue(arch, alumnos);
 			
-			
+			return true;
 			 
 			 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
+			return false;
 		}
 	}
 	@Override
@@ -287,7 +287,7 @@ public class DatabaseManager implements DataBaseInterface{
 		xml.leerXml(ruta);	
 	}
 	@Override
-	public void leer_Datos_En_Json(String ruta) {
+	public boolean leer_Datos_En_Json(String ruta) {
 		File arch=comprobarFichero(ruta);
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.registerModule(new JavaTimeModule());
@@ -298,10 +298,12 @@ public class DatabaseManager implements DataBaseInterface{
 			alumnos.forEach(alumno->{
 				this.insertar_Alumno(alumno);
 			});
-			
+			return true;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
+			return false;
 		}
 		
 	}
