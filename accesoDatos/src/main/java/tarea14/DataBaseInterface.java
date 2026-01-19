@@ -18,20 +18,13 @@ public interface DataBaseInterface {
 
 	void mandar_Datos_De_Fichero_A_BD(String ruta);
 
-	boolean guardar_Datos_En_Json(String ruta);
-
 	void guardar_Datos_En_Fichero(String ruta);
 
 	void guardar_Datos_En_Xml(String ruta);
 
+	boolean guardar_Datos_En_Json(String ruta);
+
 	boolean leer_Datos_En_Json(String ruta);
 
 	void leer_Datos_En_Xml(String ruta);
-
-	void leer_Datos_Xml_o_Json();
-
-	void mandar_Datos_De_Json_A_BD(String ruta);
-
-	void mandar_Datos_De_Xml_A_BD(String ruta);
-
 }

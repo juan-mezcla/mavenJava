@@ -24,6 +24,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -41,6 +43,10 @@ public class DatabaseManager implements DataBaseInterface{
 	//private List<String> campos = List.of("NIA", "Nombre", "Apellidos", "Genero", "FechaNacimiento", "Ciclo", "Curso","Grupo");//No se por que no me funciona ahora el .of (problema de version jdk se supone)
 	private String strCampos ="NIA,Nombre,Apellidos,Genero,FechaNacimiento,Ciclo,Curso,Grupo";// String.join(",", campos);
 	static DateTimeFormatter formatoFech=DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	
+	private static final Logger log =
+			LoggerFactory.getLogger(DatabaseManager.class);
+	
 	/**
 	 * 
 	 */
@@ -50,7 +56,7 @@ public class DatabaseManager implements DataBaseInterface{
 			
 		} catch (Exception e) {
 			// TODO: handle exception
-			e.printStackTrace();
+			log.error(e.getMessage());  
 		}
 
 	}
@@ -77,8 +83,8 @@ public class DatabaseManager implements DataBaseInterface{
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 			
+			log.warn(e.getMessage());  
 			
 		}
 
@@ -98,11 +104,11 @@ public class DatabaseManager implements DataBaseInterface{
 						LocalDate.parse(r.getString(5)), r.getString(6), r.getString(7), r.getString(8)));
 			}
 			
-			r.close();
-			
+			r.close(); 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			log.error(e.getMessage());  
 		}
 		return alumnos;
 	}
@@ -129,7 +135,8 @@ public class DatabaseManager implements DataBaseInterface{
 			escribir.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			log.error(e.getMessage());  
 		}
 
 		
@@ -153,14 +160,17 @@ public class DatabaseManager implements DataBaseInterface{
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			log.error(e.getMessage());  
 			
-		} catch (IOException e1) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			
+			log.error(e.getMessage());  
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			log.error(e.getMessage());  
 			
 		}
 		
@@ -180,7 +190,7 @@ public class DatabaseManager implements DataBaseInterface{
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			
+			log.error(e.getMessage());  
 		}
 		
 	}
@@ -194,6 +204,7 @@ public class DatabaseManager implements DataBaseInterface{
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				log.error(e.getMessage());  
 			}
 		}
 
@@ -214,6 +225,7 @@ public class DatabaseManager implements DataBaseInterface{
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			log.error(e.getMessage());  
 			
 		}
 		
@@ -229,7 +241,7 @@ public class DatabaseManager implements DataBaseInterface{
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			
+			log.error(e.getMessage());  
 		}
 		
 	}
@@ -277,6 +289,7 @@ public class DatabaseManager implements DataBaseInterface{
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			log.error(e.getMessage());  
 			return false;
 		}
 	}
@@ -302,7 +315,7 @@ public class DatabaseManager implements DataBaseInterface{
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
+			log.error(e.getMessage());  
 			return false;
 		}
 		
@@ -316,6 +329,7 @@ public class DatabaseManager implements DataBaseInterface{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			log.error(e.getMessage());  
 		}
 	}
 
@@ -331,21 +345,6 @@ public class DatabaseManager implements DataBaseInterface{
 	 */
 	public void setConexion(Connection conexion) {
 		this.conexion = conexion;
-	}
-	@Override
-	public void leer_Datos_Xml_o_Json() {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mandar_Datos_De_Json_A_BD(String ruta) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mandar_Datos_De_Xml_A_BD(String ruta) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

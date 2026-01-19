@@ -3,11 +3,17 @@ package tarea14;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Terminal_UI implements UserInterface {
 private DataBaseInterface db;
 private static Scanner prompt = new Scanner(System.in);
 private  List<Alumno> alumnos = new ArrayList<Alumno>();
+
+private static final Logger log =
+LoggerFactory.getLogger(Terminal_UI.class);
+
 public Terminal_UI(DataBaseInterface db) {
     this.db = db;
 }
@@ -28,8 +34,13 @@ public void menu(DataBaseInterface db) {
 			System.out.println("8-Guardar alumnos en fichero XML o JSON.");
 			System.out.println("9-Leer un fichero XML o JSON de alumnos y guardarlos en la BD");
 			System.out.println("10-Salir.");
+			try {
+				
 			opcion = prompt.nextInt();
-
+			} catch (java.util.InputMismatchException e) {
+				log.warn("Tiene que ser un numero");
+				opcion=0;
+			}
 			prompt.nextLine();
 			try {
 
@@ -91,10 +102,12 @@ public void menu(DataBaseInterface db) {
 					System.out.println("Valor no valido");
 				}
 			} catch (java.lang.NullPointerException e) {
-				System.out.println("Error al querer conectar con base de datos");
-				e.printStackTrace();
+				log.warn("Error al querer conectar con base de datos");
+				opcion=0;
+			}catch (java.util.InputMismatchException e) {
+				log.warn("Tiene que ser un numero");
+				opcion=0;
 			}
-
 		} while (opcion != 10);
 
 	}
