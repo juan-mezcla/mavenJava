@@ -15,12 +15,6 @@ public class DatabaseManagerTest extends TestCase {
 		database = new DatabaseManager();
 	}
 
-	@Override
-	protected void tearDown() throws Exception {
-		database.cerrarConexion();
-		super.tearDown();
-	}
-
 	public void testInsertarYObtenerAlumno() {
 		Alumno alumno = new Alumno(10, "Juan", "Pérez", 'M', LocalDate.of(2000, 5, 10), "DAM", "2", "A");
 

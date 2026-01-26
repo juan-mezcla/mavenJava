@@ -1,6 +1,8 @@
-package tarea14;
+package tarea15.interfaces;
 
 import java.util.List;
+
+import tarea15.Alumno;
 
 public interface DataBaseInterface {
 

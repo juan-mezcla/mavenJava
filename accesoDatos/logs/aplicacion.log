@@ -1,12 +1,2 @@
-2026-01-19 16:30:05 WARN  tarea14.Terminal_UI - Tiene que ser un numero
-2026-01-19 17:18:46 ERROR tarea14.DatabaseManager - Conflicting getter definitions for property "nia": tarea14.Alumno#getNia() vs tarea14.Alumno#getNIA() (through reference chain: java.util.ArrayList[0])
-2026-01-19 17:20:40 WARN  tarea14.DatabaseManager - Duplicate entry '10' for key 'alumno.PRIMARY'
-2026-01-19 17:20:40 WARN  tarea14.DatabaseManager - Duplicate entry '6' for key 'alumno.PRIMARY'
-2026-01-19 17:20:40 WARN  tarea14.DatabaseManager - Duplicate entry '11' for key 'alumno.PRIMARY'
-2026-01-19 17:20:40 WARN  tarea14.DatabaseManager - Duplicate entry '26' for key 'alumno.PRIMARY'
-2026-01-19 17:20:40 WARN  tarea14.DatabaseManager - Duplicate entry '1' for key 'alumno.PRIMARY'
-2026-01-19 17:20:40 WARN  tarea14.DatabaseManager - Duplicate entry '2' for key 'alumno.PRIMARY'
-2026-01-19 17:20:40 WARN  tarea14.DatabaseManager - Duplicate entry '6' for key 'alumno.PRIMARY'
-2026-01-19 17:20:40 WARN  tarea14.DatabaseManager - Duplicate entry '10' for key 'alumno.PRIMARY'
-2026-01-19 17:20:40 WARN  tarea14.DatabaseManager - Duplicate entry '11' for key 'alumno.PRIMARY'
-2026-01-19 17:20:40 WARN  tarea14.DatabaseManager - Duplicate entry '26' for key 'alumno.PRIMARY'
+2026-01-24 21:54:06 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-01-24 21:54:06 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.

@@ -1,4 +1,7 @@
-package tarea14;
+package tarea15;
+
+import tarea15.db.DatabaseManager;
+import tarea15.interfaces.DataBaseInterface;
 
 public class App {
 	private static DataBaseInterface conexion = new DatabaseManager();
@@ -8,7 +11,4 @@ public class App {
 		ui.menu(conexion);
 		
 	}
-
-
-
 }

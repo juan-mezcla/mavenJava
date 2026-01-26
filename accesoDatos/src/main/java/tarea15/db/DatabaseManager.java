@@ -1,21 +1,15 @@
 /**
  * 
  */
-package tarea14;
+package tarea15.db;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,6 +26,12 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
+import tarea15.Alumno;
+import tarea15.ArchivoXml;
+import tarea15.Atributo;
+import tarea15.interfaces.DataBaseInterface;
+import tarea15.interfaces.XmlFileInterface;
 
 /**
  * 
@@ -233,7 +233,7 @@ public class DatabaseManager implements DataBaseInterface{
 	@Override
 	public void guardar_Datos_En_Xml(String ruta) {
 		
-		ArchivoXml xml=new ArchivoXml(ruta, "alumnos", "1.0");
+		XmlFileInterface xml=new ArchivoXml(ruta, "alumnos", "1.0");
 		
 		List<Alumno> alumnos=this.obtener_todos_los_alumnos();
 		List<Atributo> atributosAlumno=new ArrayList<Atributo>();
@@ -280,7 +280,7 @@ public class DatabaseManager implements DataBaseInterface{
 	}
 	@Override
 	public void leer_Datos_En_Xml(String ruta) {
-		ArchivoXml xml=new ArchivoXml();
+		XmlFileInterface xml=new ArchivoXml();
 		
 		xml.leerXml(ruta);	
 	}

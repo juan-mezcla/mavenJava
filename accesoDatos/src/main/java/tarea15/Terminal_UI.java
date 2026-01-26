@@ -1,4 +1,4 @@
-package tarea14;
+package tarea15;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,20 +6,22 @@ import java.util.Scanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import tarea15.interfaces.DataBaseInterface;
+import tarea15.interfaces.UserInterface;
+
 public class Terminal_UI implements UserInterface {
-private DataBaseInterface db;
-private static Scanner prompt = new Scanner(System.in);
-private  List<Alumno> alumnos = new ArrayList<Alumno>();
+	private DataBaseInterface db;
+	private static Scanner prompt = new Scanner(System.in);
+	private List<Alumno> alumnos = new ArrayList<Alumno>();
 
-private static final Logger log =
-LoggerFactory.getLogger(Terminal_UI.class);
+	private static final Logger log = LoggerFactory.getLogger(Terminal_UI.class);
 
-public Terminal_UI(DataBaseInterface db) {
-    this.db = db;
-}
+	public Terminal_UI(DataBaseInterface db) {
+		this.db = db;
+	}
 
-@Override
-public void menu(DataBaseInterface db) {
+	@Override
+	public void menu(DataBaseInterface db) {
 
 		int opcion = 0;
 		do {
@@ -35,27 +37,27 @@ public void menu(DataBaseInterface db) {
 			System.out.println("9-Leer un fichero XML o JSON de alumnos y guardarlos en la BD");
 			System.out.println("10-Salir.");
 			try {
-				
-			opcion = prompt.nextInt();
+
+				opcion = prompt.nextInt();
 			} catch (java.util.InputMismatchException e) {
 				log.warn("Tiene que ser un numero");
-				opcion=0;
+				opcion = 0;
 			}
 			prompt.nextLine();
 			try {
 
 				switch (opcion) {
 				case 1:
-                    db.insertar_Alumno(new Alumno());
-					
+					db.insertar_Alumno(new Alumno());
+
 					break;
 				case 2:
-                    alumnos = db.obtener_todos_los_alumnos();
+					alumnos = db.obtener_todos_los_alumnos();
 
-                    alumnos.forEach(alumno -> {
-                        System.out.println(alumno.toString());
-                    });
-					
+					alumnos.forEach(alumno -> {
+						System.out.println(alumno.toString());
+					});
+
 					break;
 				case 3:
 					guardarEnFichero();
@@ -64,53 +66,54 @@ public void menu(DataBaseInterface db) {
 					mandar_datos_Fichera_a_BD();
 					break;
 				case 5:
-                    System.out.println("Introduce el NIA del alumno que quieres modificar:");
-                    int nia = prompt.nextInt();
-                    prompt.nextLine();
+					System.out.println("Introduce el NIA del alumno que quieres modificar:");
+					int nia = prompt.nextInt();
+					prompt.nextLine();
 
-                    System.out.println("Introduce el nuevo nombre del alumno:");
-                    String nombre=prompt.nextLine();
-                    db.actualizar_Alumno_por_NIA(opcion, nombre);
-					
+					System.out.println("Introduce el nuevo nombre del alumno:");
+					String nombre = prompt.nextLine();
+					db.actualizar_Alumno_por_NIA(opcion, nombre);
+
 					break;
 				case 6:
-                    System.out.println("Introduce el NIA del alumno que quieres eliminar:");
+					System.out.println("Introduce el NIA del alumno que quieres eliminar:");
 
-                     nia = prompt.nextInt();
+					nia = prompt.nextInt();
 
-                    db.eliminar_Alumno_por_NIA(nia);
-					
+					db.eliminar_Alumno_por_NIA(nia);
+
 					break;
 				case 7:
-                    System.out.println("Introduce el apellido de el alumno que quieres eliminar:");
-                    nombre=prompt.nextLine();    
+					System.out.println("Introduce el apellido de el alumno que quieres eliminar:");
+					nombre = prompt.nextLine();
 
-                    db.eliminar_Alumno_por_Apellido(nombre);
-					
+					db.eliminar_Alumno_por_Apellido(nombre);
+
 					break;
 				case 8:
 					guardar_datos_Xml_o_Json();
 					break;
 				case 9:
-					leer_datos_Xml_o_Json();//FALLA JSON CAGO EN DEU
+					leer_datos_Xml_o_Json();// FALLA JSON CAGO EN DEU
 					break;
 				case 10:
 					System.out.println("Fin del programa");
-					
+
 					break;
 				default:
 					System.out.println("Valor no valido");
 				}
 			} catch (java.lang.NullPointerException e) {
 				log.warn("Error al querer conectar con base de datos");
-				opcion=0;
-			}catch (java.util.InputMismatchException e) {
+				opcion = 0;
+			} catch (java.util.InputMismatchException e) {
 				log.warn("Tiene que ser un numero");
-				opcion=0;
+				opcion = 0;
 			}
 		} while (opcion != 10);
 
 	}
+
 	@Override
 	public void guardarEnFichero() {
 		System.out.println("introduce la ruta donde quieres que se guarden los datos (tiene que ser un .txt):");
@@ -121,6 +124,7 @@ public void menu(DataBaseInterface db) {
 			System.out.println("Tiene que ser en formato .txt el fichero");
 		}
 	}
+
 	@Override
 	public void mandar_datos_Fichera_a_BD() {// hacer primero lo de eliminar para hacer prueba
 		System.out.println("introduce la ruta del fichero que contiene los datos:");
@@ -131,47 +135,49 @@ public void menu(DataBaseInterface db) {
 			System.out.println("Tiene que ser en formato .txt el fichero");
 		}
 	}
+
 	@Override
 	public void guardar_datos_Xml_o_Json() {
 		System.out.println("Introduce la ruta y el nombre del archivo (SOLO se admiten archivos .xml o .json):");
-		String ruta=prompt.nextLine();
-		
-		if(ruta.endsWith(".json") || ruta.endsWith(".JSON")) {
-			
-			if(!db.guardar_Datos_En_Json(ruta)) {
-				 System.out.println("Error al crear el Json.");
+		String ruta = prompt.nextLine();
+
+		if (ruta.endsWith(".json") || ruta.endsWith(".JSON")) {
+
+			if (!db.guardar_Datos_En_Json(ruta)) {
+				System.out.println("Error al crear el Json.");
 			}
-			
-		}else if(ruta.endsWith(".xml") || ruta.endsWith(".XML")) {
-			
+
+		} else if (ruta.endsWith(".xml") || ruta.endsWith(".XML")) {
+
 			db.guardar_Datos_En_Xml(ruta);
 			System.out.println("XML creado correctamente");
-			
-		}else {
+
+		} else {
 			System.out.println("Formato no valido de archivo");
 		}
-		
+
 	}
+
 	@Override
 	public void leer_datos_Xml_o_Json() {
 		System.out.println("Introduce la ruta y el nombre del archivo (SOLO se admiten archivos .xml o .json):");
-		String ruta=prompt.nextLine();
-		
-		if(ruta.endsWith(".json") || ruta.endsWith(".JSON")) {
-			
-			if(!db.leer_Datos_En_Json(ruta)) {
-				 System.out.println("Error al crear el Json.");
+		String ruta = prompt.nextLine();
+
+		if (ruta.endsWith(".json") || ruta.endsWith(".JSON")) {
+
+			if (!db.leer_Datos_En_Json(ruta)) {
+				System.out.println("Error al crear el Json.");
 			}
-			
-		}else if(ruta.endsWith(".xml") || ruta.endsWith(".XML")) {
-			
+
+		} else if (ruta.endsWith(".xml") || ruta.endsWith(".XML")) {
+
 			db.guardar_Datos_En_Xml(ruta);
 			System.out.println("XML creado correctamente");
-			
-		}else {
+
+		} else {
 			System.out.println("Formato no valido de archivo");
 		}
-		
+
 	}
-   
+
 }
