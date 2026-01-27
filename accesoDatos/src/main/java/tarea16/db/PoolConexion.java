@@ -1,7 +1,7 @@
 /**
  * 
  */
-package tarea15.db;
+package tarea16.db;
 
 import java.sql.Connection;
 import java.sql.SQLException;

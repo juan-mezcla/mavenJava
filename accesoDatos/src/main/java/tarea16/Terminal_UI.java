@@ -1,4 +1,4 @@
-package tarea15;
+package tarea16;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.Scanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import tarea15.interfaces.DataBaseInterface;
-import tarea15.interfaces.UserInterface;
+import tarea16.interfaces.DataBaseInterface;
+import tarea16.interfaces.UserInterface;
 
 public class Terminal_UI implements UserInterface {
 	private DataBaseInterface db;
