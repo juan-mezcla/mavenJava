@@ -2,13 +2,19 @@ package tarea15;
 
 import tarea15.db.DatabaseManager;
 import tarea15.interfaces.DataBaseInterface;
+import tarea15.interfaces.UserInterface;
 
 public class App {
-	private static DataBaseInterface conexion = new DatabaseManager();
 
 	public static void main(String[] args) {
-		Terminal_UI ui = new Terminal_UI(conexion);
-		ui.menu(conexion);
+		DataBaseInterface conexion = new DatabaseManager();
+		UserInterface ui = new Terminal_UI(conexion);
 		
+		new App().ejecutar(conexion, ui);
+		
+	}
+	
+	public void ejecutar(DataBaseInterface db,UserInterface ui) {
+		ui.menu(db);
 	}
 }

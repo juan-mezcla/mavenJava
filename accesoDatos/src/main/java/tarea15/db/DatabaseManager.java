@@ -29,8 +29,8 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import tarea15.Alumno;
-import tarea15.ArchivoXml;
-import tarea15.Atributo;
+import tarea15.ficheros.ArchivoXml;
+import tarea15.ficheros.Atributo;
 import tarea15.interfaces.DataBaseInterface;
 import tarea15.interfaces.XmlFileInterface;
 
