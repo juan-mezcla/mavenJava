@@ -207,6 +207,32 @@ public class DatabaseManager implements DataBaseInterface{
 	}
 	
 	@Override
+	public List<String> obtener_nombre_grupos() {
+		String insert = "SELECT "+strCamposGrupo+" FROM "+ tablaGrupos;
+		List<String> grupos=new ArrayList<String>();
+		try (Connection con=PoolConexion.getConnection();
+				PreparedStatement consulta = con.prepareStatement(insert);){
+			
+			ResultSet r = consulta.executeQuery();
+			
+			while(r.next()) {
+				grupos.add(r.getString(1));
+			}
+			
+			r.close();
+			consulta.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			
+			log.warn(e.getMessage());  
+			
+		}
+		
+		return grupos;
+	}
+	
+	@Override
 	public void guardar_Datos_En_Fichero(String rutaFichero) {
 		File arch = comprobarFichero(rutaFichero);
 
@@ -412,6 +438,21 @@ public class DatabaseManager implements DataBaseInterface{
 			e.printStackTrace();
 			log.error(e.getMessage());  
 			return false;
+		}
+		
+	}
+	@Override
+	public void eliminar_Alumnos_por_grupo(int grupoElegido) {
+		String delete = "DELETE FROM "+ tablaAlumnos +" WHERE id_grupo =?";
+
+		try (Connection con=PoolConexion.getConnection();
+				PreparedStatement consulta = con.prepareStatement(delete);){
+			consulta.setInt(1, grupoElegido);
+			consulta.execute();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			log.error(e.getMessage());  
 		}
 		
 	}

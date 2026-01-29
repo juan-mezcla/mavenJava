@@ -21,6 +21,8 @@ public interface DataBaseInterface {
 	void eliminar_Alumno_por_NIA(int NIA);
 
 	void eliminar_Alumno_por_Apellido(String apellido);
+	
+	void eliminar_Alumnos_por_grupo(int grupoElegido);
 
 	void mandar_Datos_De_Fichero_A_BD(String ruta);
 
@@ -33,4 +35,6 @@ public interface DataBaseInterface {
 	boolean leer_Datos_En_Json(String ruta);
 
 	void leer_Datos_En_Xml(String ruta);
+
+	List<String> obtener_nombre_grupos();
 }

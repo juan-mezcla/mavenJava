@@ -1,6 +1,7 @@
 package tarea15;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import org.slf4j.Logger;
@@ -36,7 +37,8 @@ public class Terminal_UI implements UserInterface {
 			System.out.println("8-Guardar alumnos en fichero XML o JSON.");
 			System.out.println("9-Leer un fichero XML o JSON de alumnos y guardarlos en la BD");
 			System.out.println("10-insertar grupo.");
-			System.out.println("11-Salir.");
+			System.out.println("11-Eliminar alumnos por grupo.");
+			System.out.println("12-Salir.");
 			try {
 
 				opcion = prompt.nextInt();
@@ -54,10 +56,22 @@ public class Terminal_UI implements UserInterface {
 					break;
 				case 2:
 					alumnos = db.obtener_todos_los_alumnos();
+					String grupo = null;
+					for (Alumno alumno : alumnos) {
+						if (grupo == null) {
 
-					alumnos.forEach(alumno -> {
+							grupo = alumno.getGrupo();
+							System.out.println("\nGrupo " + grupo+":");
+
+						} else if (!grupo.contains(alumno.getGrupo())) {
+
+							grupo = alumno.getGrupo();
+							System.out.println("\nGrupo " + grupo+":");
+
+						}
 						System.out.println(alumno.toString());
-					});
+					}
+					grupo = null;
 
 					break;
 				case 3:
@@ -99,13 +113,29 @@ public class Terminal_UI implements UserInterface {
 					break;
 				case 10:
 					System.out.println("introduce el grupo que quieres añadir:");
-					String nuevoGrupo=prompt.nextLine();
-					
+					String nuevoGrupo = prompt.nextLine();
+
 					db.crear_grupo(nuevoGrupo);
+
+					break;
+
+				case 11:
+					List<String> grupos=db.obtener_nombre_grupos();
+					int opcionGrupo=1;
+					
+					for (String group : grupos) {
+						System.out.println(opcionGrupo+" - "+group+"\n");
+						opcionGrupo++;
+					}
+					
+					System.out.println("Elige una de las opciones:");
+					opcionGrupo=prompt.nextInt();
+					prompt.nextLine();
+					db.eliminar_Alumnos_por_grupo(opcionGrupo);
 					
 					break;
-					
-				case 11:
+				
+				case 12:
 					System.out.println("Fin del programa");
 
 					break;
@@ -119,7 +149,7 @@ public class Terminal_UI implements UserInterface {
 				log.warn("Tiene que ser un numero");
 				opcion = 0;
 			}
-		} while (opcion != 11);
+		} while (opcion != 12);
 
 	}
 
