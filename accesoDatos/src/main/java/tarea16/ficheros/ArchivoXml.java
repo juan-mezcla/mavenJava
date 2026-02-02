@@ -1,4 +1,4 @@
-package tarea16;
+package tarea16.ficheros;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,6 +25,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import tarea16.Alumno;
 import tarea16.interfaces.XmlFileInterface;
 
 public class ArchivoXml implements XmlFileInterface{

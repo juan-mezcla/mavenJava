@@ -26,7 +26,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import tarea16.Alumno;
-import tarea16.Atributo;
+import tarea16.ficheros.Atributo;
 
 /**
  * 

@@ -29,8 +29,8 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import tarea16.Alumno;
-import tarea16.ArchivoXml;
-import tarea16.Atributo;
+import tarea16.ficheros.ArchivoXml;
+import tarea16.ficheros.Atributo;
 import tarea16.interfaces.DataBaseInterface;
 import tarea16.interfaces.XmlFileInterface;
 
@@ -204,6 +204,32 @@ public class DatabaseManager implements DataBaseInterface{
 		}
 		
 		return id_grupos;
+	}
+	
+	@Override
+	public List<String> obtener_nombre_grupos() {
+		String insert = "SELECT "+strCamposGrupo+" FROM "+ tablaGrupos;
+		List<String> grupos=new ArrayList<String>();
+		try (Connection con=PoolConexion.getConnection();
+				PreparedStatement consulta = con.prepareStatement(insert);){
+			
+			ResultSet r = consulta.executeQuery();
+			
+			while(r.next()) {
+				grupos.add(r.getString(1));
+			}
+			
+			r.close();
+			consulta.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			
+			log.warn(e.getMessage());  
+			
+		}
+		
+		return grupos;
 	}
 	
 	@Override
@@ -412,6 +438,21 @@ public class DatabaseManager implements DataBaseInterface{
 			e.printStackTrace();
 			log.error(e.getMessage());  
 			return false;
+		}
+		
+	}
+	@Override
+	public void eliminar_Alumnos_por_grupo(int grupoElegido) {
+		String delete = "DELETE FROM "+ tablaAlumnos +" WHERE id_grupo =?";
+
+		try (Connection con=PoolConexion.getConnection();
+				PreparedStatement consulta = con.prepareStatement(delete);){
+			consulta.setInt(1, grupoElegido);
+			consulta.execute();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			log.error(e.getMessage());  
 		}
 		
 	}

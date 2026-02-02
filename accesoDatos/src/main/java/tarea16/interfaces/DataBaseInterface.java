@@ -33,4 +33,8 @@ public interface DataBaseInterface {
 	boolean leer_Datos_En_Json(String ruta);
 
 	void leer_Datos_En_Xml(String ruta);
+	
+	List<String> obtener_nombre_grupos();
+
+	void eliminar_Alumnos_por_grupo(int grupoElegido);
 }

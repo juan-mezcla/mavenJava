@@ -3,9 +3,12 @@ package tarea16;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import tarea16.Alumno;
 import tarea16.interfaces.DataBaseInterface;
 import tarea16.interfaces.UserInterface;
 
@@ -55,9 +58,26 @@ public class Terminal_UI implements UserInterface {
 				case 2:
 					alumnos = db.obtener_todos_los_alumnos();
 
-					alumnos.forEach(alumno -> {
+					List<String> grupos = db.obtener_nombre_grupos();
+
+					alumnos = eleccion_grupo();
+
+					String grupo = null;
+					for (Alumno alumno : alumnos) {
+						if (grupo == null) {
+
+							grupo = alumno.getGrupo();
+							System.out.println("\nGrupo " + grupo + ":");
+
+						} else if (!grupo.contains(alumno.getGrupo())) {
+
+							grupo = alumno.getGrupo();
+							System.out.println("\nGrupo " + grupo + ":");
+
+						}
 						System.out.println(alumno.toString());
-					});
+					}
+					grupo = null;
 
 					break;
 				case 3:
@@ -99,12 +119,12 @@ public class Terminal_UI implements UserInterface {
 					break;
 				case 10:
 					System.out.println("introduce el grupo que quieres añadir:");
-					String nuevoGrupo=prompt.nextLine();
-					
+					String nuevoGrupo = prompt.nextLine();
+
 					db.crear_grupo(nuevoGrupo);
-					
+
 					break;
-					
+
 				case 11:
 					System.out.println("Fin del programa");
 
@@ -187,6 +207,36 @@ public class Terminal_UI implements UserInterface {
 			System.out.println("Formato no valido de archivo");
 		}
 
+	}
+
+	public List<Alumno> eleccion_grupo() {
+		List<String> grupos = db.obtener_nombre_grupos();
+		System.out.println(grupos.size());
+		String grupoElegido = null;
+		int opcionGrupo;
+		do {
+
+			int cont = 1;
+			for (String grupo : grupos) {
+				System.out.println(cont + "- " + grupo);
+				cont++;
+			}
+
+			System.out.println(grupos.size() + 1 + "- Todos los grupos.");
+			System.out.println("Elige el grupo que quieras ver:");
+			opcionGrupo = prompt.nextInt();
+			prompt.nextLine();
+
+		} while (opcionGrupo < 1 || opcionGrupo != grupos.size() + 1);
+
+		if (opcionGrupo <= grupos.size() - 1) {
+
+			grupoElegido = grupos.get(opcionGrupo - 1);
+
+		}
+
+		final String grupoFilter = grupoElegido;// por que si no, me da error para usarlo en el lamba.
+		return alumnos.stream().filter(alumno -> alumno.getGrupo().equals(grupoFilter)).collect(Collectors.toList());
 	}
 
 }

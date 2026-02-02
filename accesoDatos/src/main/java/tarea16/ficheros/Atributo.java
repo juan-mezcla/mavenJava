@@ -1,4 +1,4 @@
-package tarea16;
+package tarea16.ficheros;
 
 public class Atributo {
 	private String nombre,valor;
