@@ -112,7 +112,7 @@ public class DatabaseManager implements DataBaseInterface{
 	
 	@Override
 	public List<Alumno> obtener_todos_los_alumnos() {
-		String select = "Select " + strCamposAlumno + " FROM "+ tablaAlumnos +" ORDER BY id_grupo";
+		String select = "Select id_alumno," + strCamposAlumno + " FROM "+ tablaAlumnos +" ORDER BY id_grupo";
 
 		List<Alumno> alumnos = new ArrayList<Alumno>();
 		try (Connection con=PoolConexion.getConnection();
@@ -121,8 +121,8 @@ public class DatabaseManager implements DataBaseInterface{
 			ResultSet r = consulta.executeQuery();
 
 			while (r.next()) {
-				Alumno alumno=new Alumno(r.getInt(1), r.getString(2), r.getString(3), r.getString(4).toCharArray()[0],
-							  LocalDate.parse(r.getString(5)), r.getString(6), r.getString(7),String.valueOf(r.getInt(8)));
+				Alumno alumno=new Alumno(r.getInt(1),r.getInt(2), r.getString(3), r.getString(4), r.getString(5).toCharArray()[0],
+						  LocalDate.parse(r.getString(6)), r.getString(7), r.getString(8),String.valueOf(r.getInt(9)));
 				
 				
 				alumnos.add(obtener_grupo_alumno(alumno));
@@ -182,7 +182,7 @@ public class DatabaseManager implements DataBaseInterface{
 	
 	@Override
 	public List<Integer> obtener_grupos() {
-		String insert = "SELECT idgrupos FROM "+ tablaGrupos;
+		String insert = "SELECT idgrupos FROM "+ tablaGrupos+" ORDER BY idgrupos";
 		List<Integer> id_grupos=new ArrayList<Integer>();
 		try (Connection con=PoolConexion.getConnection();
 				PreparedStatement consulta = con.prepareStatement(insert);){
@@ -208,7 +208,7 @@ public class DatabaseManager implements DataBaseInterface{
 	
 	@Override
 	public List<String> obtener_nombre_grupos() {
-		String insert = "SELECT "+strCamposGrupo+" FROM "+ tablaGrupos;
+		String insert = "SELECT "+strCamposGrupo+" FROM "+ tablaGrupos+" ORDER BY idgrupos";
 		List<String> grupos=new ArrayList<String>();
 		try (Connection con=PoolConexion.getConnection();
 				PreparedStatement consulta = con.prepareStatement(insert);){
@@ -367,11 +367,10 @@ public class DatabaseManager implements DataBaseInterface{
 		
 	}
 	@Override
-	public void guardar_Datos_En_Xml(String ruta) {
+	public void guardar_Datos_En_Xml(String ruta,List<Alumno> alumnos) {
 		
 		XmlFileInterface xml=new ArchivoXml(ruta, "alumnos", "1.0");
 		
-		List<Alumno> alumnos=this.obtener_todos_los_alumnos();
 		List<Atributo> atributosAlumno=new ArrayList<Atributo>();
 		
 		Document doc=xml.getDoc();
@@ -393,9 +392,9 @@ public class DatabaseManager implements DataBaseInterface{
 		xml.crearXml();
 	}
 	@Override
-	public boolean guardar_Datos_En_Json(String ruta) {
+	public boolean guardar_Datos_En_Json(String ruta,List<Alumno> alumnos) {
 		File arch=comprobarFichero(ruta);
-		List<Alumno> alumnos=this.obtener_todos_los_alumnos();
+		
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			mapper.registerModule(new JavaTimeModule());
@@ -415,10 +414,10 @@ public class DatabaseManager implements DataBaseInterface{
 		}
 	}
 	@Override
-	public void leer_Datos_En_Xml(String ruta) {
+	public List<Alumno> leer_Datos_En_Xml(String ruta) {
 		XmlFileInterface xml=new ArchivoXml();
 		
-		xml.leerXml(ruta);	
+		return xml.leerXml(ruta);	
 	}
 	@Override
 	public boolean leer_Datos_En_Json(String ruta) {
@@ -456,9 +455,61 @@ public class DatabaseManager implements DataBaseInterface{
 		}
 		
 	}
+	@Override
+	public Alumno datos_alumno_por_NIA(int nia) {
+		String delete = "SELECT id_alumno,"+strCamposAlumno + "  FROM "+ tablaAlumnos +" WHERE id_alumno =?";
+		Alumno alumno=null;
+		try(Connection con=PoolConexion.getConnection();
+				PreparedStatement consulta = con.prepareStatement(delete);) {
+				consulta.setInt(1,nia);
+			
+			try(ResultSet r = consulta.executeQuery();){
+				
+				if(r.next()) {
+					 
+					alumno=new Alumno(r.getInt(1),r.getInt(2), r.getString(3), r.getString(4), r.getString(5).toCharArray()[0],
+							  LocalDate.parse(r.getString(6)), r.getString(7), r.getString(8),String.valueOf(r.getInt(9)));
+					
+					alumno=obtener_grupo_alumno(alumno);
+				}
+			}catch (SQLException e) {
+				e.printStackTrace();
+				log.error(e.getMessage());  
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			log.error(e.getMessage());  
+			
+		}
+		
+		
+		return alumno;
+	}
+	@Override
+	public void cambiar_alumno_grupo(int id_alumno, int grupoNuevo) {
+		String update = "UPDATE "+ tablaAlumnos +" SET id_grupo =? WHERE id_alumno=?";
+
+		try (Connection con=PoolConexion.getConnection();
+				PreparedStatement consulta = con.prepareStatement(update);){
+			
+			consulta.setInt(1, grupoNuevo);
+			consulta.setInt(2,id_alumno);
+			
+			consulta.execute();
+			consulta.close();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			log.error(e.getMessage());  
+		}
+		
+	}
 
 	
-
+	
 	
 
 }

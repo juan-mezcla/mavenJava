@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Alumno implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	
+	private int id_alumno;
 	private int nia;
 	private String nombre,apellidos,ciclo,curso,grupo;
 	private char genero;
@@ -34,10 +34,15 @@ public class Alumno implements Serializable{
 	@Override
 	public String toString() {
 		String fechaFormat=fecha.format(this.formatoFech);
-		return "Alumno [nia=" + nia + ", nombre=" + nombre + ", apellidos=" + apellidos + ", ciclo=" + ciclo
+		return "Alumno- "+id_alumno+" [nia=" + nia + ", nombre=" + nombre + ", apellidos=" + apellidos + ", ciclo=" + ciclo
 				+ ", curso=" + curso + ", grupo=" + grupo + ", genero=" + genero + ", fecha=" + fechaFormat + "]";
 	}
 
+	
+	public String toString_campos_basicos() {
+		return "Alumno- "+id_alumno+" [nombre=" + nombre +"]";
+	}
+	
 	public Alumno(int nia, String nombre, String apellidos,  char genero,LocalDate fecha,String ciclo, String curso, String grupo
 			) {
 		
@@ -51,6 +56,42 @@ public class Alumno implements Serializable{
 		this.fecha = fecha;
 	}
 	
+	
+	
+	/**
+	 * @param id_alumno
+	 * @param nia
+	 * @param nombre
+	 * @param apellidos
+	 * @param ciclo
+	 * @param curso
+	 * @param grupo
+	 * @param genero
+	 * @param fecha
+	 */
+	public Alumno(int id_alumno, int nia, String nombre, String apellidos,  char genero,LocalDate fecha,String ciclo, String curso, String grupo
+			) {
+		super();
+		this.id_alumno = id_alumno;
+		this.nia = nia;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.ciclo = ciclo;
+		this.curso = curso;
+		this.grupo = grupo;
+		this.genero = genero;
+		this.fecha = fecha;
+	}
+	
+	
+
+	/**
+	 * @return the id_alumno
+	 */
+	public int getId_alumno() {
+		return id_alumno;
+	}
+
 	public int getNia() {
 		return nia;
 	}
