@@ -1,0 +1,26 @@
+CREATE SCHEMA `buques` ;
+
+CREATE TABLE `buques`.`capitanes` (
+  `idCapitanes` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(45) NOT NULL,
+  `numBuques` INT NULL,
+  `millas` DOUBLE NULL,
+  PRIMARY KEY (`idCapitanes`));
+  
+  
+  CREATE TABLE `buques`.`buques` (
+  `idBuques` INT NOT NULL AUTO_INCREMENT,
+  `imo` VARCHAR(45) NOT NULL,
+  `nombre` VARCHAR(45) NULL,
+  `calado` INT NULL,
+  `numContenedores` INT NULL,
+  `tipoBuque` ENUM("Porta", "Cisterna") NULL,
+  `registrosAstillero` JSON NULL,
+  `idCapitan` INT NULL,
+  PRIMARY KEY (`idBuques`, `imo`),
+  INDEX `idCapitan_idx` (`idCapitan` ASC) VISIBLE,
+  CONSTRAINT `idCapitan`
+    FOREIGN KEY (`idCapitan`)
+    REFERENCES `buques`.`capitanes` (`idCapitanes`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
