@@ -1,0 +1,65 @@
+2026-02-08 23:12:52 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-08 23:12:53 ERROR com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Exception during pool initialization.
+java.sql.SQLException: The connection property 'cachePrepStmts' acceptable values are: 'TRUE', 'FALSE', 'YES' or 'NO'. The value '250' is not acceptable.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:130)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:98)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:90)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:64)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:74)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:85)
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:434)
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:241)
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:189)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:364)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:206)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:476)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115)
+	at com.zaxxer.hikari.HikariDataSource.<init>(HikariDataSource.java:81)
+	at ejercicioRepasoDao.db.PoolConexiones.<clinit>(PoolConexiones.java:28)
+	at ejercicioRepasoDao.db.ProductosDaoImpl.insertar(ProductosDaoImpl.java:26)
+	at ejercicioRepasoDao.Controlador.crearProducto(Controlador.java:71)
+	at ejercicioRepasoDao.Controlador.ejecutar(Controlador.java:33)
+	at ejercicioRepasoDao.Main.main(Main.java:26)
+Caused by: com.mysql.cj.exceptions.WrongArgumentException: The connection property 'cachePrepStmts' acceptable values are: 'TRUE', 'FALSE', 'YES' or 'NO'. The value '250' is not acceptable.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:61)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:104)
+	at com.mysql.cj.conf.DefaultPropertySet.initializeProperties(DefaultPropertySet.java:203)
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:387)
+	... 14 common frames omitted
+Caused by: com.mysql.cj.exceptions.CJException: The connection property 'cachePrepStmts' acceptable values are: 'TRUE', 'FALSE', 'YES' or 'NO'. The value '250' is not acceptable.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:61)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:104)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:149)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:122)
+	at com.mysql.cj.conf.BooleanPropertyDefinition.booleanFrom(BooleanPropertyDefinition.java:88)
+	at com.mysql.cj.conf.BooleanPropertyDefinition.parseObject(BooleanPropertyDefinition.java:71)
+	at com.mysql.cj.conf.BooleanPropertyDefinition.parseObject(BooleanPropertyDefinition.java:39)
+	at com.mysql.cj.conf.AbstractRuntimeProperty.setValueInternal(AbstractRuntimeProperty.java:185)
+	at com.mysql.cj.conf.AbstractRuntimeProperty.initializeFrom(AbstractRuntimeProperty.java:81)
+	at com.mysql.cj.conf.DefaultPropertySet.initializeProperties(DefaultPropertySet.java:200)
+	... 15 common frames omitted
+Caused by: java.lang.IllegalArgumentException: No enum constant com.mysql.cj.conf.BooleanPropertyDefinition.AllowableValues.250
+	at java.lang.Enum.valueOf(Enum.java:238)
+	at com.mysql.cj.conf.BooleanPropertyDefinition$AllowableValues.valueOf(BooleanPropertyDefinition.java:43)
+	at com.mysql.cj.conf.BooleanPropertyDefinition.booleanFrom(BooleanPropertyDefinition.java:86)
+	... 20 common frames omitted
+2026-02-08 23:16:34 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-08 23:16:34 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-02-08 23:22:07 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-08 23:22:07 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-02-08 23:24:37 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-08 23:24:37 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-02-08 23:25:52 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-08 23:25:52 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-02-08 23:27:56 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-08 23:27:56 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
